@@ -18,11 +18,6 @@ function getApi(event) {
     axios.get('https://randomuser.me/api/')
         .then(function (response) {
             // handle success
-            // console.log(response.data.results[0].name.first)
-            // console.log(response.data.results[0].name.last)
-            // console.log(response.data.results[0].picture.medium)
-            // console.log(response.data.results[0].email)
-
             // 設定變數
             const firstName = response.data.results[0].name.first
             const lastName = response.data.results[0].name.last
