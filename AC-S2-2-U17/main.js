@@ -1,7 +1,9 @@
 const button = document.querySelector('button')
 const content = document.querySelector('.content')
 
-button.addEventListener('click', function () {
+button.addEventListener('click', getAPI)
+
+function getAPI() {
     axios.get('https://webdev.alphacamp.io/api/lyrics/Coldplay/Yellow.json')
         .then(function (response) {
             // handle success
@@ -12,4 +14,4 @@ button.addEventListener('click', function () {
             // handle error
             content.textContent = error;
         })
-})
+}
