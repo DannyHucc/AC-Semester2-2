@@ -4,7 +4,9 @@
 // 取得節點
 const buttom = document.querySelector('.btn')
 
-buttom.addEventListener('click', function (event) {
+buttom.addEventListener('click', getApi(Event))
+
+function getApi(event) {
     // 取得事件節點
     const target = event.target
     // 取得節點
@@ -36,4 +38,4 @@ buttom.addEventListener('click', function (event) {
             // handle error
             console.log(error)
         })
-})
+}
