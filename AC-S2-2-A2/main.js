@@ -6,36 +6,29 @@ const button = document.querySelector('.btn')
 const girls = document.querySelector('.girls')
 
 // 創建 function addAvatar 增加人物
-function addAvatar(event) {
-    // 存取目標節點
-    const target = event.target
-    // 計數器
-    let count = 1
-    // 取得三個不同的人物
-    while (count <= 3) {
+function addAvatar() {
+    let users = []
+    while (users.length < 3) {
         // 使用 axios 取得 API
         axios.get('https://randomuser.me/api/')
             .then(function (response) {
-                // handle success
-                let gender = response.data.results[0].gender.toString()
-                console.log(gender)
-                if (gender === 'female')
+                const user = response.data.results[0]
+                if (user.gender === 'female') // 判斷是否為女生
                 {
-                    // 製作人物
-                    doAvatar(target, response)
-                    // count++
+                    users.push(user) // 製作人物
                 }
             })
             .catch(function (error) {
-                // handle error
                 console.log(error);
             })
-        count++
+            break
     }
+    console.log(users)
+    console.log(users.length)
 }
 
 // 創建 function doAvatar 製作人物
-function doAvatar(target, response) {
+function doAvatar(response) {
 
     // 創建變數用來存放人物的資料
     const firstName = response.data.results[0].name.first
@@ -44,14 +37,13 @@ function doAvatar(target, response) {
     const email = response.data.results[0].email
 
     // 創建變數 htmlContent 用來增加資料
-    girls.innerHTML += 
-    `
-    <div class="card m-2 p-2">
-        <h5 class="card-title">${firstName} ${lastName}</h5>
-        <img src="${src}" class="card-img" alt="card-img">
-        <p class="card-text">${email}</p>
-    </div>
-    `
+    return  `
+            <div class="card m-2 p-2 style="width: 14rem">
+            <h5 class="card-title">${firstName} ${lastName}</h5>
+            <img src="${src}" class="card-img" alt="card-img">
+            <p class="card-text">${email}</p>
+            </div>
+            `
 }
 
 
