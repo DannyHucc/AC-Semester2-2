@@ -48,7 +48,7 @@ function doAvatar(target, response) {
     `
     <div class="card m-2 p-2">
         <h5 class="card-title">${firstName} ${lastName}</h5>
-        <img src="${src}" class="card-img-top" alt="...">
+        <img src="${src}" class="card-img" alt="card-img">
         <p class="card-text">${email}</p>
     </div>
     `
