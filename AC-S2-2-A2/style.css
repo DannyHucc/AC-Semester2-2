@@ -1,11 +1,11 @@
-/* box 大小包含邊距和邊界 */
+/* 設定 box 大小包含邊界和邊距 */
 * {
     box-sizing: border-box;
 }
 
-/* 將 body 和 html 的大小設定跟 viewport 一樣 */
-body,
-html {
+/* 將 html body 設定為 viewport 大小 */
+html,
+body {
     width: 100%;
     height: 100%;
 }
