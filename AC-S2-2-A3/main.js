@@ -31,6 +31,7 @@ function displaySongList (album) {
     let htmlText = ''
     // 用來取出每一個 track
     album.tracks.forEach(track => {
+        // 加入元素到 htmlText
         htmlText += 
         `
         <li class"nav-item">
