@@ -1,3 +1,5 @@
+'use strict'
+
 const button = document.querySelector('button')
 const content = document.querySelector('.content')
 
