@@ -62,7 +62,7 @@ function moveAndDelete (event) {
 // delete list
 function deleteList (event) {
     const target = event.target
-    const parentElement = event.target.parentElement
+    const parentElement = target.parentElement
     parentElement.remove() // 刪除元素
 }
 
