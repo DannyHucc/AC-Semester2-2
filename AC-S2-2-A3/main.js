@@ -24,3 +24,19 @@ const album = {
 }
 
 // WRITE YOUR CODE ////////////////////////
+
+// 顯示 SongList
+function displaySongList (album) {
+    // 用來存放 html 語句
+    let html = ''
+    // 用來取出每一個 track
+    album.tracks.forEach(track => {
+        html += 
+        `
+        <a class="song-list" id="list-profile-list" href="#list-profile" role="tab">${track}</a>
+        `
+    })
+    songList.innerHTML = html
+}
+
+displaySongList(album)
