@@ -1,0 +1,12 @@
+/* 設定 box 寬高包含邊距和邊界 */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-y: scroll;
+}
+
+.lyrics-box {
+    border: 1px solid #dadada;
+}
