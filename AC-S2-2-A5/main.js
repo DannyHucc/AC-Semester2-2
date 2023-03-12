@@ -36,3 +36,63 @@ const productData = [
     }
 ];
 // ======= 請從這裡開始 =======
+
+// 建立節點
+const productMenu = document.querySelector('#menu')
+
+// 顯示產品資訊
+function displayProduct(productData) {
+    Array.from(productMenu.children).forEach((product, index) => {
+        // 處理圖片
+        product.firstElementChild.firstElementChild.
+            src = productData[index].imgUrl
+        // 處理產品名稱
+        product.firstElementChild.
+            lastElementChild.firstElementChild.
+            textContent = productData[index].name
+        // 處理產品價錢
+        product.firstElementChild.
+            lastElementChild.firstElementChild.
+            nextElementSibling.
+            textContent = productData[index].price
+    })
+}
+
+// 清空訂單狀況
+function emptyOrder() {
+    productMenu.nextElementSibling.
+        nextElementSibling.firstElementChild
+        .innerHTML = ""
+}
+
+// 新增訂單
+function addNewOrder(target) {
+    // 產品名稱
+    const name = target.previousElementSibling.previousElementSibling.textContent
+    // 產品價錢
+    const price = target.previousElementSibling.textContent
+    // 回傳訂單資訊
+    return `<li class="list-group-item">${name} X 1 小計：${price}</li>`
+}
+
+// 處理購物清單
+function displayListGroup(event) {
+    // 存取目標事件
+    const target = event.target
+    // 當目標事件的 class 為 btn
+    if (target.classList.contains('btn')) {
+        // 建立節點
+        const listGroup = document.querySelector('.list-group')
+        // 新增訂單
+        listGroup.innerHTML += addNewOrder(target)
+    }
+}
+
+// 顯示產品資訊
+displayProduct(productData)
+
+// 清空訂單狀況
+emptyOrder()
+
+// 處理購物清單
+productMenu.addEventListener('click', displayListGroup)
