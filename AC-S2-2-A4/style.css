@@ -23,3 +23,8 @@ li>label[for="todo"] {
     width: 210px;
     margin-bottom: 0.5rem;
 }
+
+.fa-trash,
+li>label {
+    cursor: pointer;
+}
