@@ -78,7 +78,8 @@ function deleteList(event) {
 
 // 增加初始的內容
 for (let todo of todos) {
-    todoList.innerHTML += addItem(todo)
+    const className = 'todo'
+    todoList.innerHTML += addItem(todo, className)
 }
 
 // 建立按鈕的事件
