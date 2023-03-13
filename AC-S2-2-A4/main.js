@@ -16,20 +16,13 @@ const todos = [
     "Pay bills"
 ]
 
-function test(text, className = '') {
-
-    className = className.slice(1, className.length - 1)
-    console.log(typeof text, typeof className)
-    console.log(text, className)
-}
-
 // 新增內容
 function addItem(text, className = '') {
     let newItem = ""
     newItem =
         `
     <li>
-        <label for="todo" class="${className}">${text}</label>
+        <label for="todo" class="label ${className}">${text}</label>
         <i class="delete fa fa-trash"></i>
     </li>
     `
@@ -55,25 +48,37 @@ function inputValues(event) {
     }
 };
 
-// move and delete
-function moveAndDelete(event) {
+// delete list
+function deleteList(event) {
+    const target = event.target
+    target.parentElement.remove() // 刪除元素
+}
+
+// move To Done List
+function moveToDoneList(event) {
+    const target = event.target
+    const parentElement = target.parentElement
+    if (target.classList.contains("delete")) {
+        deleteList(event) // 刪除元素
+    } else if (target.tagName === "LABEL") { // 當點擊 label
+        const className = 'checked'
+        // 增加至 done list 裏面
+        doneList.innerHTML += addItem(parentElement.textContent, className) // 新增內容
+        deleteList(event) // 刪除元素
+    }
+}
+
+// move To Todo List
+function moveToTodoList(event) {
     const target = event.target
     const parentElement = target.parentElement
     if (target.classList.contains("delete")) {
         deleteList(event) // 刪除元素
     } else if (target.tagName === "LABEL") { // 當點擊 label
         // 增加至 done list 裏面
-        const className = 'checked'
-        doneList.innerHTML += addItem(parentElement.textContent, className) // 新增內容
+        todoList.innerHTML += addItem(parentElement.textContent) // 新增內容
         deleteList(event) // 刪除元素
     }
-}
-
-// delete list
-function deleteList(event) {
-    const target = event.target
-    const parentElement = target.parentElement
-    parentElement.remove() // 刪除元素
 }
 
 // 增加初始的內容
@@ -89,7 +94,7 @@ addBtn.addEventListener("click", inputValues)
 input.addEventListener("keyup", inputValues)
 
 // 建立點擊 todo list 的事件
-todoList.addEventListener("click", moveAndDelete)
+todoList.addEventListener("click", moveToDoneList)
 
 // 建立點擊 done list 的事件
-doneList.addEventListener("click", deleteList)
+doneList.addEventListener("click", moveToTodoList)

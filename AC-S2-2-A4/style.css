@@ -24,7 +24,7 @@ li>label[for="todo"] {
     margin-bottom: 0.5rem;
 }
 
-.todo,
+.label,
 .fa-trash {
     cursor: pointer;
 }
