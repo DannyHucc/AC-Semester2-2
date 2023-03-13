@@ -45,6 +45,8 @@ function inputValues(event) {
             todoList.innerHTML += addItem(inputValue) // 新增內容
             input.value = ""
         }
+    } else {
+        console.log('123')
     }
 };
 
