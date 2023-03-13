@@ -37,12 +37,10 @@ const productData = [
 ];
 // ======= 請從這裡開始 =======
 
-// 建立節點
-const productMenu = document.querySelector('#menu')
-
 // 顯示產品資訊
 function displayProduct(productData) {
-    Array.from(productMenu.children).forEach((product, index) => {
+    // 處理每個節點內容
+    Array.from(menu.children).forEach((product, index) => {
         // 處理圖片
         product.firstElementChild.firstElementChild.
             src = productData[index].imgUrl
@@ -60,9 +58,7 @@ function displayProduct(productData) {
 
 // 清空訂單狀況
 function emptyOrder() {
-    productMenu.nextElementSibling.
-        nextElementSibling.firstElementChild
-        .innerHTML = ""
+    cart.innerHTML = ""
 }
 
 // 新增訂單
@@ -72,19 +68,57 @@ function addNewOrder(target) {
     // 產品價錢
     const price = target.previousElementSibling.textContent
     // 回傳訂單資訊
-    return `<li class="list-group-item">${name} X 1 小計：${price}</li>`
+    return `<li class="list-group-item">${name} X 1 小計： ${price}</li>`
 }
 
-// 處理購物清單
+// 顯示總價
+function displayTotalAmount(cart) {
+    // 用來儲存總價
+    let total = 0
+    // 處理每個節點內容
+    Array.from(cart.children).forEach((item) => {
+        // 取得數量
+        let count = item.textContent.split(" ")[2]
+        // 取得價錢
+        let price = item.textContent.split(" ")[4]
+        // 計算總價
+        total += count * price
+    })
+    // 修改總價內容
+    totalAmount.textContent = total
+}
+
+// 顯示購物清單
 function displayListGroup(event) {
     // 存取目標事件
     const target = event.target
     // 當目標事件的 class 為 btn
     if (target.classList.contains('btn')) {
-        // 建立節點
-        const listGroup = document.querySelector('.list-group')
         // 新增訂單
-        listGroup.innerHTML += addNewOrder(target)
+        cart.innerHTML += addNewOrder(target)
+        // 顯示總價
+        displayTotalAmount(cart)
+    }
+}
+
+// 顯示購買狀況
+function alertSentOrder() {
+    // 確認是否有購買產品
+    if (totalAmount.textContent === "--") {
+        // 顯示尚未購買
+        alert("你尚未購買產品");
+    } else {
+        // 增加文字
+        let text = "感謝購買"
+        // 處理每個訂單的內容
+        Array.from(cart.children).forEach((item) => {
+            // 處理訂單的內容
+            text += `\n${item.textContent}`
+        })
+        // 增加總金額
+        text += `\n總金額：${totalAmount.textContent}`
+        // 顯示購買狀況
+        alert(text);
     }
 }
 
@@ -94,5 +128,8 @@ displayProduct(productData)
 // 清空訂單狀況
 emptyOrder()
 
-// 處理購物清單
-productMenu.addEventListener('click', displayListGroup)
+// 處理購物清單事件
+menu.addEventListener('click', displayListGroup)
+
+// 處理結帳事件
+button.addEventListener('click', alertSentOrder)
