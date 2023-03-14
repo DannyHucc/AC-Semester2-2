@@ -1,3 +1,5 @@
+'use strict'
+
 // ======= default data =======
 const menu = document.querySelector("#menu");
 const cart = document.querySelector("#cart");
